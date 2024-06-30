@@ -40,7 +40,7 @@ const Sidebar = () => {
   };
   const handleLogout = async () => {
     await axios
-      .get("http://localhost:4000/api/v1/user/admin/logout", {
+      .get("https://mj-proj-1.onrender.com/api/v1/user/admin/logout", {
         withCredentials: true,
       })
       .then((res) => {
