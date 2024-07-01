@@ -14,9 +14,17 @@ config({ path: "./config/config.env" });
 
 app.use(cors({
     origin: [`${process.env.FRONTEND_URL}`, `${process.env.DASHBOARD_URL}`],
-    method: ["GET", "POST", "DELETE", "PUT"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
 }));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", `${process.env.FRONTEND_URL}`);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 app.use(cookieParser());
 app.use(express.json());
